@@ -6,6 +6,16 @@ This exposes a simple NodeJS API using the express package. The idea is to respo
 
 First, you need to set it up an IoT Tuya account in order to make this working, you can follow this guide [here](https://github.com/codetheweb/tuyapi/blob/master/docs/SETUP.md#listing-tuya-devices-from-the-tuya-smart-or-smart-life-apps) on the TuyaAPI. Take a look at the `Listing Tuya devices from the Tuya Smart or Smart Life apps` section.
 
+### Set it up the environment variables
+
+If everything worked fine on the mandatory configuration as described previously, you should be able to get an `ID` and a `KEY` using the tuya-cli. With that values you need to create a `.env` file and update as follow:
+
+```bash
+cat .env
+TUYA_ID=XXX
+TUYA_KEY=YYY
+```
+
 ### Installation
 
 ```bash
