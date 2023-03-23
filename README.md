@@ -1,6 +1,6 @@
 # iot-positivo-smart-plug-node-exporter
 
-This exposes a simple NodeJS API using the express package. The idea is to response back with the same "protocol" as a node-exporter application, which is something that Prometheus expects, so we can plot the data into Grafana.
+This exposes a simple NodeJS API using the express package. The idea is to respond back with the same "protocol" as a node-exporter application, which is something that Prometheus expects, so we can plot the data into Grafana.
 
 ### Configuration
 
