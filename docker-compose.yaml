@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  iot-smart-plug-prometheus-node-exporter:
+    build:
+      context: .
+    environment:
+      - TUYA_ID=${TUYA_ID}
+      - TUYA_KEY=${TUYA_KEY}
+    restart: always
+    ports:
+      - 3000:3000
+      - 6666:6666/udp
+      - 6667:6667/udp
