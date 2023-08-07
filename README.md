@@ -10,7 +10,7 @@ First, you need to set it up an IoT Tuya account in order to make this working, 
 
 If everything worked fine on the mandatory configuration as described previously, you should be able to get an `ID` and a `KEY` using the tuya-cli. With that values you need to create a `config.json` file and update as follow:
 
-```bash
+```json
 {
     "devices": [
         {
