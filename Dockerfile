@@ -3,6 +3,7 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 COPY ["package.json", "package-lock.json", "./"]
+COPY config.json .
 COPY index.js .
 RUN npm install --production
 CMD [ "node", "index.js" ]
