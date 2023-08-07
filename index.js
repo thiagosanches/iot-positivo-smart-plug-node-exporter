@@ -1,11 +1,17 @@
 const express = require('express');
 const TuyAPI = require('tuyapi');
+const config = require('./config.json')
 
-const device = new TuyAPI({
-    id: process.env.TUYA_ID,
-    key: process.env.TUYA_KEY,
-    issueGetOnConnect: false
-});
+const devices = []
+for (const device of config.devices) {
+    devices.push(
+        new TuyAPI({
+            id: device.tuyaId,
+            key: device.tuyaKey,
+            issueGetOnConnect: false
+        })
+    )
+}
 
 const app = express();
 const port = 3000;
@@ -16,25 +22,32 @@ app.use(function (req, res, next) {
 });
 
 app.get('/metrics', async (req, res) => {
-    await device.find();
-    await device.connect();
-    const status = await device.get({ schema: true });
-    device.disconnect();
+    let response = '';
+    let index = 1;
+    for (const device of devices) {
 
-    const current = status.dps['18'];
-    const power = status.dps['19'];
-    const voltage = status.dps['20'];
+        await device.find();
+        await device.connect();
+        const status = await device.get({ schema: true });
+        device.disconnect();
 
-    const response = `# HELP iot_plug1_current Current A
-# TYPE iot_plug1_current gauge
-iot_plug1_current ${current}
-# HELP iot_plug1_power Power W
-# TYPE iot_plug1_power gauge
-iot_plug1_power ${power}
-# HELP iot_plug1_voltage Voltage V
-# TYPE iot_plug1_voltage gauge
-iot_plug1_voltage ${voltage}
+        const current = status.dps['18'];
+        const power = status.dps['19'];
+        const voltage = status.dps['20'];
+
+        response += `# HELP iot_plug${index}_current Current A
+# TYPE iot_plug${index}_current gauge
+iot_plug${index}_current ${current}
+# HELP iot_plug${index}_power Power W
+# TYPE iot_plug${index}_power gauge
+iot_plug${index}_power ${power}
+# HELP iot_plug${index}_voltage Voltage V
+# TYPE iot_plug${index}_voltage gauge
+iot_plug${index}_voltage ${voltage}
 `
+        index += 1
+    }
+
     res.removeHeader('X-Powered-By');
     res.removeHeader('ETag');
     res.removeHeader('Date');
