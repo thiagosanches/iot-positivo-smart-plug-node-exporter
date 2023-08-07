@@ -8,12 +8,24 @@ First, you need to set it up an IoT Tuya account in order to make this working, 
 
 ### Set it up the environment variables
 
-If everything worked fine on the mandatory configuration as described previously, you should be able to get an `ID` and a `KEY` using the tuya-cli. With that values you need to create a `.env` file and update as follow:
+If everything worked fine on the mandatory configuration as described previously, you should be able to get an `ID` and a `KEY` using the tuya-cli. With that values you need to create a `config.json` file and update as follow:
 
 ```bash
-cat .env
-TUYA_ID=XXX
-TUYA_KEY=YYY
+{
+    "devices": [
+        {
+            "name": "Plug WiFi",
+            "tuyaId": "XXXXXXXXXXXXXXXXX",
+            "tuyaKey": "YYYYYYYYYYYYYYY"
+            
+        },
+        {
+            "name": "Plug WiFi 2",
+            "tuyaId": "XXXXXXXXXXXXXXXXX",
+            "tuyaKey": "YYYYYYYYYYYYYYY"
+        }
+    ]
+}
 ```
 
 ### Installation
